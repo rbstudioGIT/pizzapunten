@@ -1,0 +1,426 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'); /* Font Awesome voor iconen */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #0f172a; /* Donkerblauw/grijs */
+  --card: #1e293b; /* Iets lichter blauw/grijs */
+  --card-hover: #334155; /* Nog lichter voor hover */
+  --text: #f1f5f9; /* Bijna wit */
+  --text-muted: #94a3b8; /* Gedempt grijs */
+  --accent: #ef4444; /* Rood accent */
+  --accent-dark: #dc2626; /* Donkerder rood */
+  --border: #334155; /* Randkleur */
+
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow-elevation-low: 0 2px 4px var(--shadow-color);
+  --shadow-elevation-medium: 0 4px 8px var(--shadow-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 2rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  display: flex; /* Gebruik flex voor centreren */
+  flex-direction: column;
+  align-items: center; /* Centreer content horizontaal */
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('veld.jpg') center/cover no-repeat;
+  opacity: 0.05; /* Nog subtieler gemaakt */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* Maximale breedte voor grote schermen */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem; /* Padding aan zijkanten voor kleinere schermen */
+}
+
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centreer header inhoud */
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--card);
+}
+
+header img {
+  height: 50px;
+  width: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.2rem); /* Responsive font size */
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+header h1 img {
+  height: 1.5em; /* Relatief aan font size */
+}
+
+/* Hoofd layout voor content secties */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr; /* Standaard 1 kolom (mobiel) */
+  gap: 2rem;
+  width: 100%;
+}
+
+#leaderboard {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Rank | Name | Points */
+  row-gap: .75rem; /* Meer ruimte */
+  column-gap: 1rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-elevation-medium);
+  overflow: hidden; /* Zorgt dat de lijn niet buiten de kaart komt */
+}
+
+#pizza-line {
+  position: absolute;
+  margin-top: -5px;
+  left: 1.5rem; /* Lijn met padding */
+  right: 1.5rem;
+  height: 5px; /* Dunner lijntje */
+  background: var(--accent);
+  opacity: 0.5; /* Subtieler */
+  top: 0; /* Dynamisch ingesteld via JS */
+  z-index: 0;
+  transition: top 0.5s ease-in-out; /* Animatie */
+}
+
+.lb-row {
+  position: relative;
+  z-index: 1;
+  padding: 0.1rem 0; /* Kleine padding om lijn niet te raken */
+}
+
+.lb-rank {
+  grid-column: 1;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.lb-name {
+  grid-column: 2;
+  font-weight: 600;
+  white-space: nowrap; /* Voorkom afbreken namen */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Voeg ... toe bij te lange namen */
+}
+
+.lb-points {
+  grid-column: 3;
+  text-align: right;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Kleinere min breedte voor mobiel */
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card);
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  box-shadow: var(--shadow-elevation-low);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevation-medium);
+  background: var(--card-hover);
+}
+
+.card-title {
+  font-weight: 600;
+  opacity: .85; /* Iets minder transparant */
+  font-size: .9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.card-value .points, .card-value .delta {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-left: 0.25rem;
+}
+.card-value .delta.positive {
+    color: #22c55e; /* Groen */
+}
+.card-value .delta.negative {
+    color: var(--accent); /* Rood (al ingesteld) */
+}
+
+
+#chart-wrapper, #data-section {
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-elevation-medium);
+  width: 100%;
+}
+
+#chart-wrapper {
+  overflow: hidden; /* Voorkom dat grafiek buiten de rand komt */
+}
+
+canvas {
+  width: 100% !important;
+  height: 350px !important; /* Iets minder hoog */
+  max-height: 60vh;
+}
+
+#data-section {
+  overflow: hidden; /* Verberg scrollbar tot details open is */
+}
+
+#data-section summary {
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none; /* Verwijder standaard pijl */
+  padding-bottom: .75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#data-section summary::after { /* Gebruik ::after voor pijl */
+  content: "\f078"; /* Font Awesome Chevron Down */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+  margin-left: .5rem;
+  transition: transform .2s ease;
+  font-size: 1rem;
+}
+
+#data-section[open] summary::after {
+  transform: rotate(-180deg); /* Draai pijl omhoog */
+}
+
+#data-section .table-wrapper {
+  max-height: 500px; /* Maximale hoogte voor scrollen */
+  overflow: auto; /* Scrollbars alleen als nodig */
+  margin-top: 1rem;
+  border: 1px solid var(--border); /* Rand om de wrapper */
+  border-radius: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent; /* Achtergrond zit op wrapper/body */
+}
+
+th,
+td {
+  padding: .75rem 1rem; /* Meer padding */
+  border: none; /* Verwijder individuele celranden */
+  border-bottom: 1px solid var(--border); /* Alleen onderrand */
+  text-align: left;
+  white-space: nowrap; /* Voorkom ongewenste afbreking */
+}
+
+th {
+  background: var(--card-hover); /* Donkerdere header */
+  font-weight: 700;
+  position: sticky; /* Maak header sticky */
+  top: 0; /* Plak bovenaan de scrollende container */
+  z-index: 10;
+}
+
+tbody tr:last-child td {
+  border-bottom: none; /* Geen rand bij laatste rij */
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03); /* Subtiel zebra-strepen */
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.07); /* Hover effect */
+}
+
+/* --- Media Queries --- */
+
+/* Tablet & kleiner */
+@media (max-width: 992px) {
+  .main-content {
+    grid-template-columns: 1fr; /* Stapel alles onder elkaar */
+  }
+  canvas {
+      height: 300px ;
+  }
+}
+
+/* Mobiel */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem; /* Minder padding op mobiel */
+  }
+  .container {
+      padding: 0; /* Geen extra padding in container */
+  }
+
+  header {
+    flex-direction: row; /* Logo en tekst naast elkaar */
+    align-items: center; /* Verticaal centreren */
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  header img {
+    height: 100px;
+  }
+
+  #leaderboard {
+    padding: 1rem;
+    grid-template-columns: auto 1fr auto; /* Behoud 3 kolommen maar geef naam meer ruimte */
+     column-gap: 0.5rem; /* Minder ruimte tussen kolommen */
+  }
+
+   #pizza-line {
+      left: 1rem;
+      right: 1rem;
+   }
+
+  #cards {
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem 1.25rem;
+  }
+
+  #chart-wrapper, #data-section {
+    padding: 1rem;
+  }
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  #data-section summary {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop layout: Leaderboard en Kaarten naast elkaar */
+@media (min-width: 993px) {
+  .main-content {
+      grid-template-columns: 1fr 1fr; /* Twee kolommen */
+      align-items: start; /* Lijn items bovenaan uit */
+  }
+
+  #leaderboard {
+      grid-column: 1 / 2; /* Plaats in eerste kolom */
+      /* Potentieel toevoegen: max-height: X, overflow-y: auto; als lijst te lang wordt */
+  }
+
+  #cards {
+      grid-column: 2 / 3; /* Plaats in tweede kolom */
+      grid-row: 1 / 2; /* Zorg dat het naast leaderboard staat */
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Iets kleinere kaarten mogelijk */
+  }
+
+  #chart-wrapper {
+      grid-column: 1 / -1; /* Over de volledige breedte */
+  }
+
+  #data-section {
+      grid-column: 1 / -1; /* Over de volledige breedte */
+  }
+}
+
+/* Extra grote schermen */
+@media (min-width: 1400px) {
+   /* Eventueel nog specifieke aanpassingen voor zeer grote schermen */
+   #cards {
+       /* Misschien 3 kolommen forceren als er ruimte is */
+       /* grid-template-columns: repeat(3, 1fr); */
+   }
+}
+
+.chartjs-tooltip { background-color: white; color: black; border: 1px solid #ccc; padding: 5px; border-radius: 3px; }
+.chartjs-chart .chartjs-legend ul {
+    max-height: 300px; overflow-y: auto; 
+}
+
+.ios-install-banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: #fff;
+  color: #111;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  font-size: 0.95rem;
+  z-index: 1000;
+  text-align: center;
+}
+
+.ios-install-banner strong {
+  color: #22c55e;
+}
+
+.close-ios-banner {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}

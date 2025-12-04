@@ -1,0 +1,17 @@
+# Schakel mod_rewrite in
+RewriteEngine On
+
+# Forceer HTTPS (indien nog niet actief)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Verwijder .html extensie uit URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Redirect van trainer.html naar nette URL /trainer
+Redirect 301 /trainer.html /trainer
+
+# Custom 404 error page
+ErrorDocument 404 /404.html
