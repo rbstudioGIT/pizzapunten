@@ -1,120 +1,16 @@
-<!DOCTYPE html>
-<html lang="nl">
+<!doctype html>
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pizza‑punten Dashboard V.V. Sittard</title>
-  <link rel="icon" type="image/x-icon" href="vvpizza.webp">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#000000" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/icons/icon-192.png">
-
-  <!-- Externe libs -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <title>temp_app</title>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <img src="logo.png" alt="Clublogo V.V. Sittard" />
-
-      <h1>
-        Pizza‑punten Dashboard
-        <img src="pizza.png" alt="Pizza" />
-      </h1>
-
-    </header>
-
-    <div class="main-content">
-      <section id="leaderboard">
-        <!-- Leaderboard rows worden hier door JS ingevoegd -->
-        <div id="pizza-line"></div>
-      </section>
-
-      <section id="cards">
-        <div class="card" id="man-to-beat">
-          <span class="card-title"><i class="fas fa-crown"></i>Man to Beat</span>
-          <span class="card-value">
-            <span id="mtb-name">—</span>
-            <span id="mtb-points" class="points">— pts</span>
-          </span>
-        </div>
-        <div class="card" id="man-in-vorm">
-          <span class="card-title"><i class="fas fa-arrow-trend-up"></i>Man in Vorm</span>
-          <span class="card-value">
-            <span id="miv-name">—</span>
-            <span id="miv-delta" class="delta">— pts</span>
-          </span>
-        </div>
-        <div class="card" id="total-sessions-card">
-          <span class="card-title"><i class="fas fa-calendar-check"></i>Trainingen</span>
-          <span class="card-value" id="total-sessions">—</span>
-        </div>
-        <div class="card" id="best-winrate">
-          <span class="card-title"><i class="fas fa-trophy"></i>Best Winrate Player</span>
-          <span class="card-value">
-            <span id="best-winrate-name">—</span>
-            <span id="best-winrate-percentage">-- %</span>
-          </span>
-        </div>
-        <div class="card" id="most-present-card">
-          <span class="card-title"><i class="fas fa-user-check"></i>Most Consistent</span>
-          <span class="card-value">
-            <span id="most-present-name">—</span>
-          </span>
-        </div>
-        <div class="card" id="least-present-card">
-          <span class="card-title"><i class="fas fa-user-xmark"></i>Room for Improvement</span>
-          <span class="card-value">
-            <span id="least-present-name">—</span>
-          </span>
-        </div>
-
-      </section>
-
-      <section id="chart-wrapper">
-        <canvas id="pointsChart"></canvas>
-      </section>
-
-      <details id="data-section">
-        <summary>Overzicht per sessie</summary>
-        <div class="table-wrapper">
-          <table id="data-table">
-            <thead>
-              <tr>
-                <th>Datum</th>
-                <th>Speler</th>
-                <th>Punten</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Tabelrijen worden hier door JS ingevoegd -->
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div> <!-- end .main-content -->
-
-  </div> <!-- end .container -->
-
-  <!-- JS -->
-  <script src="script.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
-
 
 </html>
