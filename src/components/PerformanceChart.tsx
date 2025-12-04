@@ -45,7 +45,7 @@ export function PerformanceChart({ data }: { data: DashboardData }) {
                 <CardTitle className="text-xl font-bold uppercase tracking-widest text-primary">Puntenverloop</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="h-[400px] w-full">
+                <div className="h-[400px] min-h-[400px] w-full min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
