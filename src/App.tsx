@@ -4,6 +4,7 @@ import { Rankings } from "@/components/Rankings";
 import { PerformanceChart } from "@/components/PerformanceChart";
 import { SessionLog } from "@/components/SessionLog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { InstallPrompt } from "@/components/InstallPrompt";
 
 function App() {
   const data = usePizzaData();
@@ -91,9 +92,22 @@ function App() {
           </div>
         </div>
 
-        <footer className="text-center text-slate-600 text-xs py-8">
+        <footer className="text-center text-slate-600 text-xs py-8 space-y-2">
           <p>POWERED BY V.V. SITTARD &bull; DESIGNED FOR CHAMPIONS</p>
+          <a
+            href="https://rbstudio.nl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 opacity-40 hover:opacity-100 transition-all duration-300 group"
+          >
+            <span className="h-px w-4 bg-slate-700 group-hover:bg-primary transition-colors"></span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] group-hover:text-primary group-hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.6)] transition-all">
+              Webdev RBStudio.nl
+            </span>
+            <span className="h-px w-4 bg-slate-700 group-hover:bg-primary transition-colors"></span>
+          </a>
         </footer>
+        <InstallPrompt />
       </div>
     </div>
   );

@@ -94,7 +94,7 @@ export function Rankings({ data }: { data: DashboardData }) {
             <CardContent className="flex-1 flex flex-col gap-6">
                 <TooltipProvider delayDuration={0}>
                     {/* Podium */}
-                    <div className="flex justify-center items-end gap-2 md:gap-4 h-48 mb-4">
+                    <div className="flex justify-center items-end gap-2 md:gap-4 h-48 mb-4 mt-8">
                         {/* 2nd Place */}
                         {top3[1] && (
                             <motion.div
@@ -105,12 +105,12 @@ export function Rankings({ data }: { data: DashboardData }) {
                                 className="flex flex-col items-center w-1/3"
                             >
                                 {renderPlayerTooltip(top3[1][0], top3[1][1], (
-                                    <div className="flex flex-col items-center cursor-help group">
+                                    <div className="flex flex-col items-center cursor-help group w-full">
                                         <div className="text-sm font-bold text-slate-300 mb-1 group-hover:text-white transition-colors">{top3[1][0]}</div>
-                                        <div className="w-full bg-slate-700/50 border-t-4 border-slate-400 h-24 rounded-t-lg flex items-start justify-center pt-2 relative group-hover:bg-slate-700/80 transition-colors">
-                                            <span className="text-2xl font-bold text-slate-400">2</span>
-                                            <div className="absolute bottom-2 text-xs font-mono text-slate-300">{top3[1][1]} pts</div>
+                                        <div className="w-full bg-slate-700/50 border-t-4 border-slate-400 h-24 rounded-t-lg flex items-center justify-center relative group-hover:bg-slate-700/80 transition-colors">
+                                            <span className="text-3xl font-bold text-slate-400/50">2</span>
                                         </div>
+                                        <div className="mt-2 text-sm font-mono text-slate-300 font-bold">{top3[1][1]} pts</div>
                                     </div>
                                 ))}
                             </motion.div>
@@ -126,13 +126,13 @@ export function Rankings({ data }: { data: DashboardData }) {
                                 className="flex flex-col items-center w-1/3 z-10"
                             >
                                 {renderPlayerTooltip(top3[0][0], top3[0][1], (
-                                    <div className="flex flex-col items-center cursor-help group">
+                                    <div className="flex flex-col items-center cursor-help group w-full">
                                         <Crown className="w-8 h-8 text-yellow-400 mb-1 animate-bounce" />
                                         <div className="text-lg font-bold text-yellow-400 mb-1 group-hover:text-yellow-300 transition-colors">{top3[0][0]}</div>
-                                        <div className="w-full bg-yellow-500/20 border-t-4 border-yellow-400 h-32 rounded-t-lg flex items-start justify-center pt-2 relative shadow-[0_0_20px_rgba(250,204,21,0.2)] group-hover:bg-yellow-500/30 transition-colors">
-                                            <span className="text-4xl font-bold text-yellow-400">1</span>
-                                            <div className="absolute bottom-2 text-sm font-mono text-yellow-200 font-bold">{top3[0][1]} pts</div>
+                                        <div className="w-full bg-yellow-500/20 border-t-4 border-yellow-400 h-32 rounded-t-lg flex items-center justify-center relative shadow-[0_0_20px_rgba(250,204,21,0.2)] group-hover:bg-yellow-500/30 transition-colors">
+                                            <span className="text-5xl font-bold text-yellow-400/50">1</span>
                                         </div>
+                                        <div className="mt-2 text-base font-mono text-yellow-400 font-bold">{top3[0][1]} pts</div>
                                     </div>
                                 ))}
                             </motion.div>
@@ -148,12 +148,12 @@ export function Rankings({ data }: { data: DashboardData }) {
                                 className="flex flex-col items-center w-1/3"
                             >
                                 {renderPlayerTooltip(top3[2][0], top3[2][1], (
-                                    <div className="flex flex-col items-center cursor-help group">
+                                    <div className="flex flex-col items-center cursor-help group w-full">
                                         <div className="text-sm font-bold text-amber-700 mb-1 group-hover:text-amber-600 transition-colors">{top3[2][0]}</div>
-                                        <div className="w-full bg-amber-900/30 border-t-4 border-amber-700 h-16 rounded-t-lg flex items-start justify-center pt-2 relative group-hover:bg-amber-900/50 transition-colors">
-                                            <span className="text-2xl font-bold text-amber-700">3</span>
-                                            <div className="absolute bottom-2 text-xs font-mono text-amber-600">{top3[2][1]} pts</div>
+                                        <div className="w-full bg-amber-900/30 border-t-4 border-amber-700 h-16 rounded-t-lg flex items-center justify-center relative group-hover:bg-amber-900/50 transition-colors">
+                                            <span className="text-2xl font-bold text-amber-700/50">3</span>
                                         </div>
+                                        <div className="mt-2 text-xs font-mono text-amber-600 font-bold">{top3[2][1]} pts</div>
                                     </div>
                                 ))}
                             </motion.div>
